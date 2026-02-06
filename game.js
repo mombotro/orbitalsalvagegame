@@ -1,3 +1,94 @@
+// Boot Sequence Animation
+async function runBootSequence() {
+    const bootText = document.getElementById('boot-text');
+    const bootSequence = document.getElementById('boot-sequence');
+    const gameContainer = document.getElementById('game-container');
+
+    const bootMessages = [
+        { text: 'ORBITAL SALVAGE SYSTEMS v0.01', delay: 50, class: 'info' },
+        { text: 'Initializing core systems...', delay: 30 },
+        { text: '[OK] Memory allocation complete', delay: 20, class: 'success' },
+        { text: '[OK] Neural interface connected', delay: 20, class: 'success' },
+        { text: '[OK] Quantum encryption enabled', delay: 20, class: 'success' },
+        { text: '[OK] Debris field scanners online', delay: 20, class: 'success' },
+        { text: '', delay: 300 },
+        { text: 'Loading security protocols...', delay: 30 },
+        { text: '[OK] Firewall active', delay: 20, class: 'success' },
+        { text: '[OK] ICE defense systems armed', delay: 20, class: 'success' },
+        { text: '', delay: 300 },
+        { text: '════════════════════════════════════', delay: 10, class: 'info' },
+        { text: '     SECURE LOGIN REQUIRED', delay: 50, class: 'warning' },
+        { text: '════════════════════════════════════', delay: 10, class: 'info' },
+        { text: '', delay: 500 },
+        { text: 'Username: ', delay: 50, typing: true },
+        { text: 'grn.dfndr', delay: 80, typing: true, class: 'info' },
+        { text: '', delay: 300 },
+        { text: 'Password: ', delay: 50, typing: true },
+        { text: '********', delay: 100, typing: true, class: 'info' },
+        { text: '', delay: 500 },
+        { text: 'Authenticating...', delay: 30 },
+        { text: '[OK] Identity verified', delay: 600, class: 'success' },
+        { text: '[OK] Access granted', delay: 300, class: 'success' },
+        { text: '', delay: 300 },
+        { text: 'Welcome, Runner.', delay: 50, class: 'success' },
+        { text: 'Establishing connection to debris field...', delay: 30 },
+        { text: '', delay: 500 },
+        { text: 'SYSTEM READY', delay: 100, class: 'success' }
+    ];
+
+    async function typeText(text, className = '') {
+        return new Promise(resolve => {
+            let i = 0;
+            const span = document.createElement('span');
+            if (className) span.className = className;
+            bootText.appendChild(span);
+
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    span.textContent += text[i];
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    bootText.appendChild(document.createElement('br'));
+                    resolve();
+                }
+            }, 50);
+        });
+    }
+
+    async function addLine(text, className = '') {
+        const span = document.createElement('span');
+        if (className) span.className = className;
+        span.textContent = text;
+        bootText.appendChild(span);
+        bootText.appendChild(document.createElement('br'));
+        bootText.scrollTop = bootText.scrollHeight;
+    }
+
+    for (const msg of bootMessages) {
+        if (msg.typing) {
+            await typeText(msg.text, msg.class);
+        } else {
+            await addLine(msg.text, msg.class);
+        }
+        await new Promise(resolve => setTimeout(resolve, msg.delay));
+    }
+
+    // Fade out boot sequence
+    await new Promise(resolve => setTimeout(resolve, 800));
+    bootSequence.classList.add('fade-out');
+
+    // Fade in game
+    await new Promise(resolve => setTimeout(resolve, 500));
+    gameContainer.style.transition = 'opacity 1s';
+    gameContainer.style.opacity = '1';
+
+    // Remove boot sequence after fade
+    setTimeout(() => {
+        bootSequence.remove();
+    }, 1000);
+}
+
 // Game State
 const game = {
     metal: 0,
@@ -686,5 +777,7 @@ function updateDisplay() {
     }
 }
 
-// Start game
-init();
+// Start boot sequence then game
+runBootSequence().then(() => {
+    init();
+});

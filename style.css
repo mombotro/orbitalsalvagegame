@@ -13,6 +13,76 @@ body {
     touch-action: manipulation;
 }
 
+/* Boot Sequence */
+.boot-sequence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boot-sequence.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.boot-content {
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.boot-text {
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.boot-text .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: #00ff00;
+    animation: blink 0.7s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+.boot-text .error {
+    color: #ff0000;
+}
+
+.boot-text .success {
+    color: #00ff00;
+}
+
+.boot-text .warning {
+    color: #ffff00;
+}
+
+.boot-text .info {
+    color: #00ffff;
+}
+
 .container {
     max-width: 1000px;
     margin: 0 auto;
