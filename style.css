@@ -357,6 +357,9 @@ body {
 }
 
 .toggle-btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background-color: #330033;
     color: #ff00ff;
     border: 2px solid #550055;
@@ -367,11 +370,13 @@ body {
     height: 20px;
     cursor: pointer;
     padding: 0;
+    margin: 0;
     line-height: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     outline: none;
+    box-shadow: none;
 }
 
 .toggle-btn:hover {

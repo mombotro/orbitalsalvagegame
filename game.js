@@ -14,7 +14,7 @@ async function runBootSequence() {
         { text: '', delay: 300 },
         { text: 'Loading security protocols...', delay: 30 },
         { text: '[OK] Firewall active', delay: 20, class: 'success' },
-        { text: '[OK] ICE defense systems armed', delay: 20, class: 'success' },
+        { text: '[OK] Defense grid armed', delay: 20, class: 'success' },
         { text: '', delay: 300 },
         { text: '════════════════════════════════════', delay: 10, class: 'info' },
         { text: '     SECURE LOGIN REQUIRED', delay: 50, class: 'warning' },
@@ -122,7 +122,7 @@ const game = {
         'Breach Protocol': 0,
         'Orbital Platform': 0,
         'Singularity Engine': 0,
-        'ICE Breaker': 0,
+        'Aegis Protocol': 0,
         'Neural Link': 0,
         'Quantum Firewall': 0
     },
@@ -134,7 +134,7 @@ const game = {
         'Breach Protocol': { cost: 1000, bonus: 10, type: 'passive' },
         'Orbital Platform': { cost: 5000, bonus: 50, type: 'passive' },
         'Singularity Engine': { cost: 25000, bonus: 250, type: 'passive' },
-        'ICE Breaker': { cost: 200, bonus: 2, type: 'defense' },
+        'Aegis Protocol': { cost: 200, bonus: 2, type: 'defense' },
         'Neural Link': { cost: 2000, bonus: 5, type: 'defense' },
         'Quantum Firewall': { cost: 10000, bonus: 10, type: 'defense' }
     },
@@ -575,10 +575,10 @@ function triggerRandomAttack() {
     game.underAttack = true;
     game.randomAttackCount++;
 
-    // Periodic attacks get harder with each wave
+    // Periodic attacks get harder with each wave (accelerating difficulty)
     const baseClicks = 12;
     const miningBonus = Math.min(20, Math.floor(game.metalPerSecond / 25)); // Caps at 20
-    const progressionBonus = Math.floor(game.randomAttackCount / 2); // +1 every 2 attacks
+    const progressionBonus = Math.floor((game.randomAttackCount - 1) * (game.randomAttackCount) / 2); // Triangular: 0,1,3,6,10,15...
     const totalBeforeDefense = baseClicks + miningBonus + progressionBonus;
     game.defenseClicksNeeded = Math.max(5, totalBeforeDefense - game.defenseRating);
     game.defenseClicksDone = 0;
