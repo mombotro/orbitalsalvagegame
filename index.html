@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Salvage Operations v0.01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Title -->
+        <div class="title-banner">
+            <pre>╔═══════════════════════════════════════════════════════════╗
+║       Orbital Salvage Operations v0.01                   ║
+╚═══════════════════════════════════════════════════════════╝</pre>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <!-- System Status -->
+                <div class="status-header">┌─[ SYSTEM STATUS ]─────────────────┐</div>
+                <div class="stats-frame">
+                    <div id="metal-stat">│ SCRAP METAL......: 0</div>
+                    <div id="mps-stat">│ MINING RATE......: 0 /sec</div>
+                    <div id="mpc-stat">│ HARVEST POWER....: 1 /click</div>
+                    <div id="clicks-stat">│ TOTAL EXTRACTS...: 0</div>
+                    <div id="defense-stat">│ DEFENSE RATING...: 0</div>
+                    <div>└────────────────────────────────────┘</div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="upgrades">[UPGRADES]</button>
+                    <button class="tab-button" data-tab="fleet">[FLEET]</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="upgrades-tab" class="tab-content active">
+                    <div class="scrollable-content" id="upgrades-list"></div>
+                </div>
+
+                <div id="fleet-tab" class="tab-content">
+                    <div class="scrollable-content" id="fleet-list"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <!-- Combat Log -->
+                <div class="log-section">
+                    <div class="log-header">
+                        <button id="log-toggle" class="toggle-btn">▼</button>
+                        <span>[ COMBAT LOG ]</span>
+                    </div>
+                    <div id="log-content" class="log-display"></div>
+                    <div class="separator">──────────────────────────────</div>
+                </div>
+
+                <!-- Salvage Interface -->
+                <div class="salvage-header">
+                    <pre>╔══════════════════════╗
+║  SALVAGE INTERFACE  ║
+╚══════════════════════╝</pre>
+                </div>
+
+                <div class="salvage-content">
+                    <div class="ascii-art">
+                        <pre>[ DEBRIS FIELD ACTIVE ]</pre>
+                    </div>
+
+                    <button id="mine-button" class="mine-button">>>> EXTRACT <<<</button>
+
+                    <div class="status-text">[ ONLINE ]</div>
+
+                    <div id="connection-status" class="connection-status">
+                        Breach Protocol Active<br>
+                        Connection: SECURE<br>
+                        Decryption: 100%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning Overlay (hidden by default) -->
+    <div id="warning-overlay" class="warning-overlay hidden">
+        <div class="warning-content">
+            <pre class="warning-title">╔════════════════════════════╗
+║    !!! WARNING !!!        ║
+╚════════════════════════════╝</pre>
+            <div id="warning-text" class="warning-text">INCOMING THREAT DETECTED</div>
+            <div id="warning-countdown" class="warning-countdown">3.0s</div>
+        </div>
+    </div>
+
+    <!-- Attack Overlay (hidden by default) -->
+    <div id="attack-overlay" class="attack-overlay hidden">
+        <div class="attack-content">
+            <pre class="attack-title">╔════════════════════════════╗
+║  !!! BREACH DETECTED !!!  ║
+╚════════════════════════════╝</pre>
+            <div id="attack-warning" class="attack-warning">
+                HOSTILE NETRUNNER DETECTED<br>
+                ATTEMPTING TO SIPHON RESOURCES
+            </div>
+            <div id="attack-progress" class="attack-progress">FIREWALL STATUS: 0/0</div>
+            <div id="attack-timer" class="attack-timer">TIME: 10.0s</div>
+            <button id="defend-button" class="defend-button">>>> DEFEND <<<<br>[CLICK RAPIDLY]</button>
+            <div class="risk-label">FAILURE PENALTY: -30% RESOURCES</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
