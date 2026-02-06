@@ -573,17 +573,28 @@ body {
     .right-panel {
         width: 100%;
         max-height: none;
+        padding-bottom: 120px; /* Space for sticky button */
     }
 
     .scrollable-content {
         max-height: 300px;
     }
 
-    /* Larger touch targets */
+    /* Sticky extract button on mobile */
+    .salvage-content {
+        position: relative;
+    }
+
     .mine-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
         font-size: 16px;
         padding: 20px 40px;
         min-width: 250px;
+        box-shadow: 0 4px 15px rgba(0, 255, 0, 0.5);
     }
 
     .defend-button {
@@ -596,39 +607,60 @@ body {
         padding: 10px;
     }
 
-    .buy-button, .build-button, .deploy-button, .recall-button {
-        min-width: 80px;
-        font-size: 9px;
-        padding: 8px 5px;
+    /* Compact horizontal layout for items on mobile */
+    .upgrade-item, .ship-item {
+        padding: 5px;
+        flex-direction: row;
+        align-items: center;
     }
 
-    /* Stack ship buttons vertically on very small screens */
+    .item-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .item-name {
+        font-size: 9px;
+    }
+
+    .ship-item .item-name {
+        font-size: 10px;
+    }
+
+    .item-type, .item-bonus, .item-count {
+        font-size: 7px;
+    }
+
+    .item-buttons {
+        flex-direction: column;
+        gap: 2px;
+        flex-shrink: 0;
+    }
+
+    .buy-button, .build-button, .deploy-button, .recall-button {
+        min-width: 65px;
+        max-width: 65px;
+        font-size: 7px;
+        padding: 4px 3px;
+        white-space: nowrap;
+    }
+
+    /* Very small screens */
     @media screen and (max-width: 480px) {
-        .upgrade-item, .ship-item {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .item-buttons {
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .buy-button, .build-button, .deploy-button, .recall-button {
-            width: 100%;
-            min-width: 100%;
-        }
-
         .title-banner pre {
             font-size: 6px;
         }
 
         .stats-frame div {
-            font-size: 9px;
+            font-size: 8px;
         }
 
         .log-display {
             font-size: 7px;
+        }
+
+        .item-name {
+            font-size: 8px;
         }
     }
 

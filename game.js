@@ -274,6 +274,9 @@ function toggleLog() {
     }
 }
 
+// Log collapsed state
+let logCollapsed = true;
+
 // Mine action
 function mine() {
     game.metal += game.metalPerClick;
@@ -485,11 +488,13 @@ function triggerRandomAttack() {
     const baseClicks = 12;
     const miningBonus = Math.min(20, Math.floor(game.metalPerSecond / 25)); // Caps at 20
     const progressionBonus = Math.floor(game.randomAttackCount / 2); // +1 every 2 attacks
-    game.defenseClicksNeeded = Math.max(5, baseClicks + miningBonus + progressionBonus - game.defenseRating);
+    const totalBeforeDefense = baseClicks + miningBonus + progressionBonus;
+    game.defenseClicksNeeded = Math.max(5, totalBeforeDefense - game.defenseRating);
     game.defenseClicksDone = 0;
     game.defenseTimeLeft = 10.0;
 
-    logEvent(`!!! RANDOM ATTACK #${game.randomAttackCount} !!!`);
+    console.log(`Attack #${game.randomAttackCount}: base=${baseClicks}, mining=${miningBonus}, progression=${progressionBonus}, defense=-${game.defenseRating}, total=${game.defenseClicksNeeded}`);
+    logEvent(`!!! RANDOM ATTACK #${game.randomAttackCount} (${game.defenseClicksNeeded} clicks) !!!`);
 
     document.getElementById('connection-status').className = 'connection-status compromised';
     document.getElementById('connection-status').innerHTML =
