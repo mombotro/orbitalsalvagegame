@@ -359,17 +359,32 @@ body {
 .toggle-btn {
     background-color: #330033;
     color: #ff00ff;
-    border: 2px raised #550055;
+    border: 2px solid #550055;
     font-family: 'Courier New', monospace;
     font-weight: bold;
     font-size: 8px;
     width: 20px;
     height: 20px;
     cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
 }
 
 .toggle-btn:hover {
     background-color: #550055;
+}
+
+.toggle-btn:active {
+    background-color: #770077;
+}
+
+.toggle-btn:focus {
+    outline: 1px solid #ff00ff;
+    outline-offset: 2px;
 }
 
 .log-display {
