@@ -177,8 +177,13 @@ function setupFleet() {
 
 // Event listeners
 function setupEventListeners() {
-    // Mine button
-    document.getElementById('mine-button').addEventListener('click', mine);
+    // Mine button (support both click and touch)
+    const mineButton = document.getElementById('mine-button');
+    mineButton.addEventListener('click', mine);
+    mineButton.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        mine();
+    });
 
     // Tab switching
     document.querySelectorAll('.tab-button').forEach(btn => {
@@ -221,8 +226,23 @@ function setupEventListeners() {
         });
     });
 
-    // Defend button
-    document.getElementById('defend-button').addEventListener('click', defendClick);
+    // Defend button (support both click and touch)
+    const defendButton = document.getElementById('defend-button');
+    defendButton.addEventListener('click', defendClick);
+    defendButton.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        defendClick();
+    });
+
+    // Prevent zoom on double-tap for mobile
+    document.addEventListener('touchend', (e) => {
+        const now = Date.now();
+        const lastTouch = document.lastTouchEnd || 0;
+        if (now - lastTouch <= 300) {
+            e.preventDefault();
+        }
+        document.lastTouchEnd = now;
+    }, { passive: false });
 }
 
 // Switch tabs

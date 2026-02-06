@@ -9,6 +9,8 @@ body {
     color: #00ff00;
     font-family: 'Courier New', monospace;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .container {
@@ -535,4 +537,145 @@ body {
     color: #ff0000;
     font-size: 8px;
     margin-top: 10px;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .container {
+        padding: 5px;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .title-banner {
+        padding: 5px;
+    }
+
+    .title-banner pre {
+        font-size: 8px;
+    }
+
+    .main-content {
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .left-panel {
+        width: 100%;
+        margin-bottom: 10px;
+        max-height: none;
+    }
+
+    .right-panel {
+        width: 100%;
+        max-height: none;
+    }
+
+    .scrollable-content {
+        max-height: 300px;
+    }
+
+    /* Larger touch targets */
+    .mine-button {
+        font-size: 16px;
+        padding: 20px 40px;
+        min-width: 250px;
+    }
+
+    .defend-button {
+        font-size: 16px;
+        padding: 25px 50px;
+    }
+
+    .tab-button {
+        font-size: 10px;
+        padding: 10px;
+    }
+
+    .buy-button, .build-button, .deploy-button, .recall-button {
+        min-width: 80px;
+        font-size: 9px;
+        padding: 8px 5px;
+    }
+
+    /* Stack ship buttons vertically on very small screens */
+    @media screen and (max-width: 480px) {
+        .upgrade-item, .ship-item {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .item-buttons {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .buy-button, .build-button, .deploy-button, .recall-button {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .title-banner pre {
+            font-size: 6px;
+        }
+
+        .stats-frame div {
+            font-size: 9px;
+        }
+
+        .log-display {
+            font-size: 7px;
+        }
+    }
+
+    /* Warning overlay mobile */
+    .warning-content {
+        padding: 15px 25px;
+        max-width: 90%;
+    }
+
+    .warning-title {
+        font-size: 10px;
+    }
+
+    .warning-text {
+        font-size: 12px;
+    }
+
+    .warning-countdown {
+        font-size: 20px;
+    }
+
+    /* Attack overlay mobile */
+    .attack-content {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .attack-title {
+        font-size: 10px;
+    }
+
+    .attack-warning, .attack-progress, .attack-timer {
+        font-size: 9px;
+    }
+}
+
+/* Landscape mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .main-content {
+        flex-direction: row;
+    }
+
+    .left-panel, .right-panel {
+        width: 50%;
+    }
+
+    .scrollable-content {
+        max-height: 200px;
+    }
 }
